@@ -1,21 +1,12 @@
 from daobase import DAOBase
-from app.models import Vessel, Voyage, Personnel, Shipment, Port, PortCall
+from app.models import Parts, Orders, Customers
 
 
-class VesselDAO(DAOBase):
-    model = Vessel
+class CustomersDAO(DAOBase):
+    model = Customers
 
-class VoyageDAO(DAOBase):
-    model = Voyage
+class OrdersDAO(DAOBase):
+    model = Orders
 
-class PersonnelDAO(DAOBase):
-    model = Personnel
-
-class ShipmentDAO(DAOBase):
-    model = Shipment
-
-class PortDAO(DAOBase):
-    model = Port
-
-class PortCallDAO(DAOBase):
-    model = PortCall
+class PartsDAO(DAOBase):
+    model = Parts

@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from app.dao import PortDAO, VesselDAO, VoyageDAO, PortCallDAO, ShipmentDAO, PersonnelDAO
+from app.dao import CustomersDAO, PartsDAO, OrdersDAO
+
 
 router = APIRouter(
     prefix='/crud',
@@ -7,37 +8,38 @@ router = APIRouter(
 )
 
 
-@router.get('/vessels')
+@router.get('/customers')
 async def read_data():
-    data = await VesselDAO.get_object()
+    data = await CustomersDAO.get_object()
     return data
 
 
-@router.get('/ports')
+@router.delete('/delete/customers')
+async def delete(id: int):
+    await CustomersDAO.delete(id = id)
+    return 'deleted'
+
+
+@router.get('/parts')
 async def read_data():
-    data = await PortDAO.get_object()
+    data = await PartsDAO.get_object()
     return data
 
 
-@router.get('/voyages')
+@router.delete('/delete/parts')
+async def delete(id: int):
+    await PartsDAO.delete(id = id)
+    return 'deleted'
+
+
+@router.get('/orders')
 async def read_data():
-    data = await VoyageDAO.get_object()
+    data = await OrdersDAO.get_object()
     return data
 
 
-@router.get('/shipments')
-async def read_data():
-    data = await ShipmentDAO.get_object()
-    return data
+@router.delete('/delete/orders')
+async def delete(id: int):
+    await OrdersDAO.delete(id = id)
+    return 'deleted'
 
-
-@router.get('/personnel')
-async def read_data():
-    data = await PersonnelDAO.get_object()
-    return data
-
-
-@router.get('/port_calls')
-async def read_data():
-    data = await PortCallDAO.get_object()
-    return data
