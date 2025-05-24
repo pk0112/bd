@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.dao import CustomersDAO, PartsDAO, OrdersDAO
+from app.dao import GoalsDAO, TeamsDAO, MatchesDAO, PlayersDAO
 
 
 router = APIRouter(
@@ -8,38 +8,49 @@ router = APIRouter(
 )
 
 
-@router.get('/customers')
+@router.get('/goals')
 async def read_data():
-    data = await CustomersDAO.get_object()
+    data = await GoalsDAO.get_object()
     return data
 
 
-@router.delete('/delete/customers')
+@router.delete('/delete/goals')
 async def delete(id: int):
-    await CustomersDAO.delete(id = id)
+    await GoalsDAO.delete(id = id)
     return 'deleted'
 
 
-@router.get('/parts')
+@router.get('/players')
 async def read_data():
-    data = await PartsDAO.get_object()
+    data = await PlayersDAO.get_object()
     return data
 
 
-@router.delete('/delete/parts')
+@router.delete('/delete/players')
 async def delete(id: int):
-    await PartsDAO.delete(id = id)
+    await PlayersDAO.delete(id = id)
     return 'deleted'
 
 
-@router.get('/orders')
+@router.get('/matches')
 async def read_data():
-    data = await OrdersDAO.get_object()
+    data = await MatchesDAO.get_object()
     return data
 
 
-@router.delete('/delete/orders')
+@router.delete('/delete/matches')
 async def delete(id: int):
-    await OrdersDAO.delete(id = id)
+    await MatchesDAO.delete(id = id)
     return 'deleted'
 
+
+@router.get('/teams')
+async def read_data():
+    data = await TeamsDAO.get_object()
+    return data
+
+
+@router.delete('/delete/teams')
+async def delete(id: int):
+    await TeamsDAO.delete(id = id)
+    return 'deleted'

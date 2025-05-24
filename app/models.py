@@ -4,28 +4,34 @@ from sqlalchemy.orm import relationship, declarative_base
 from core.psql import Base
 
 
-class Customers(Base):
-    __tablename__ = 'customers'
+class Teams(Base):
+    __tablename__ = 'teams'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
-    phone = Column(String(50))
-    email = Column(String(100))
+    league = Column(String, nullable=False)
 
 
-class Parts(Base):
-    __tablename__ = 'parts'
+class Players(Base):
+    __tablename__ = 'players'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    type = Column(String(100), nullable=False)
     name = Column(String(100), nullable=False)
-    capacity = Column(Integer(), nullable=False)
+    team_id = Column(Integer(), ForeignKey('teams.id'), nullable=False)
 
 
-class Orders(Base):
-    __tablename__ = 'orders'
+class Matches(Base):
+    __tablename__ = 'matches'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)
-    description = Column(String, nullable=False)
-    fix_part_id = Column(Integer, ForeignKey('parts.id'), nullable=False)
+    team_1 = Column(Integer(), ForeignKey('teams.id'), nullable=False)
+    team_2 = Column(Integer(), ForeignKey('teams.id'), nullable=False)
+    league = Column(String)
+
+
+class Goals(Base):
+    __tablename__ = 'goals'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    match_id = Column(Integer, ForeignKey('matches.id'), nullable=False)
+    player_id = Column(Integer, ForeignKey('players.id'), nullable=False)
