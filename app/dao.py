@@ -1,15 +1,12 @@
 from daobase import DAOBase
-from app.models import Players, Matches, Teams, Goals
+from app.models import Employee, Departament, Salary
 
 
-class PlayersDAO(DAOBase):
-    model = Players
+class EmployeeDAO(DAOBase):
+    model = Employee
 
-class MatchesDAO(DAOBase):
-    model = Matches
+class DepartmentDAO(DAOBase):
+    model = Departament
 
-class TeamsDAO(DAOBase):
-    model = Teams
-
-class GoalsDAO(DAOBase):
-    model = Goals
+class SalaryDAO(DAOBase):
+    model = Salary

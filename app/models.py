@@ -4,34 +4,26 @@ from sqlalchemy.orm import relationship, declarative_base
 from core.psql import Base
 
 
-class Teams(Base):
-    __tablename__ = 'teams'
+class Departament(Base):
+    __tablename__ = 'departaments'
     
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(100), nullable=False)
-    league = Column(String, nullable=False)
+    departament_id = Column(Integer, primary_key=True, autoincrement=True)
+    departament_name = Column(String(100), nullable=False)
 
-
-class Players(Base):
-    __tablename__ = 'players'
+class Employee(Base):
+    __tablename__ = 'employees'
     
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(100), nullable=False)
-    team_id = Column(Integer(), ForeignKey('teams.id'), nullable=False)
+    employee_id = Column(Integer, primary_key=True, autoincrement=True)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
+    departament_id = Column(Integer, ForeignKey('departaments.departament_id'), nullable=False)
+    experience_years = Column(Integer, nullable=False)
+    phone_number = Column(String(20), nullable=False)
+    position = Column(String(100), nullable=False)
 
-
-class Matches(Base):
-    __tablename__ = 'matches'
+class Salary(Base):
+    __tablename__ = 'salaries'
     
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    team_1 = Column(Integer(), ForeignKey('teams.id'), nullable=False)
-    team_2 = Column(Integer(), ForeignKey('teams.id'), nullable=False)
-    league = Column(String)
-
-
-class Goals(Base):
-    __tablename__ = 'goals'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    match_id = Column(Integer, ForeignKey('matches.id'), nullable=False)
-    player_id = Column(Integer, ForeignKey('players.id'), nullable=False)
+    salary_id = Column(Integer, primary_key=True, autoincrement=True)
+    employee_id = Column(Integer, ForeignKey('employees.employee_id'), nullable=False)
+    salary_amount = Column(Integer, nullable=False)
